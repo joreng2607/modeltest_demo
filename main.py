@@ -88,11 +88,11 @@ def update(dt):
 
     global t
     if(run):
-        if t==len(X)-10:
+        if t>=len(X)-10:
             t=0
             print("DONE!")
         else:
-            t += 1
+            t += 5
     monkey.position.x = -0.005*X[t]
     monkey.position.z = 0.005*Y[t]
     monkey.position.y = 0.005*Z[t]
@@ -101,8 +101,7 @@ def update(dt):
     monkey.rotation.z = Pitch[t]
 
 
-pyglet.clock.schedule_interval(update, 0.0095)
+pyglet.clock.schedule_interval(update, 131/(len(X)/5))
 
-print(len(Roll))
 
 pyglet.app.run()
