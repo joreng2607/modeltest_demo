@@ -1,9 +1,11 @@
 import pyglet
+import os
 import ratcave as rc
 from pyglet.gl import gl
 from pyglet.window import key
 
 from modeltestSDK import SDKclient
+
 client = SDKclient()
 campaign_name = "STT"
 test_name = "waveReg_1110"
@@ -29,6 +31,9 @@ Yaw = curr_timeseries[5].to_arrays()[1]
 window = pyglet.window.Window(resizable=True)
 keys = key.KeyStateHandler()
 window.push_handlers(keys)
+
+global f
+f = 0
 
 # get an object
 model_file = rc.resources.obj_primitives
@@ -70,10 +75,17 @@ pyglet.clock.schedule(move_camera)
 global run
 run = False
 
+
+
 @window.event
 def on_draw():
     with rc.default_shader:
         scene.draw()
+    global f
+    f += 1
+    kitten_stream = open(f'screenshots\{str(f)}.png', 'wb')
+    pyglet.image.get_buffer_manager().get_color_buffer().save((str(f)+'.png'), file=kitten_stream)
+    kitten_stream.close()
 
 t = 0
 
