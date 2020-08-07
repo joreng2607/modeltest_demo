@@ -81,11 +81,6 @@ run = False
 def on_draw():
     with rc.default_shader:
         scene.draw()
-    global f
-    f += 1
-    kitten_stream = open(f'screenshots\{str(f)}.png', 'wb')
-    pyglet.image.get_buffer_manager().get_color_buffer().save((str(f)+'.png'), file=kitten_stream)
-    kitten_stream.close()
 
 t = 0
 
@@ -94,8 +89,8 @@ def update(dt):
 
     global run
 
-    if keys[key.SPACE]:
-        run = not run
+    if keys[key.ENTER]:
+        run = True
 
 
     global t
@@ -103,14 +98,22 @@ def update(dt):
         if t>=len(X)-10:
             t=0
             print("DONE!")
+            exit()
         else:
             t += 5
+        global f
+        f += 1
+        filename = "img" + str(f).zfill(4) + ".png"
+        kitten_stream = open(f'screenshots\{filename}', 'wb')
+        pyglet.image.get_buffer_manager().get_color_buffer().save(filename , file=kitten_stream)
+        kitten_stream.close()
     monkey.position.x = -0.005*X[t]
     monkey.position.z = 0.005*Y[t]
     monkey.position.y = 0.005*Z[t]
     monkey.rotation.x = Roll[t]
     monkey.rotation.y = Yaw[t]
     monkey.rotation.z = Pitch[t]
+
 
 
 pyglet.clock.schedule_interval(update, 131/(len(X)/5))
