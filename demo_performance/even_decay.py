@@ -12,7 +12,7 @@ import time
 
 start = time.perf_counter()
 
-name = "test" #"surge", "heave", "moored_heave", "pitch" or "moored_pitch"
+name = "test" #"surge", "hsseave", "moored_heave", "pitch" or "moored_pitch"
 sf = 75
 #dt = 0.01
 n_tests = 3 # Number of decay tests in model test base file. If more than 1, the script will produce plots for all
