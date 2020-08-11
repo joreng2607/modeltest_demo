@@ -24,7 +24,6 @@ timeseries.get_data_points()
 sensors = [timeseries.get_sensor()]
 data = [timeseries.data_points.to_pandas()]
 
-
 times, values = timeseries.to_arrays()
 
 maxima, indices = find_maxima(values, retind=True)

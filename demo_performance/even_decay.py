@@ -41,15 +41,20 @@ elif name == "moored_pitch":
     t_dur = 15  # Time-interval for each test in the decay-test.
 elif name == "test":
     n_name = "*M206_COF X"
-    f = ['Recorded Data_waveIrreg_2101.tdms']
+    f = ['Recorded Data_2101.tdms']
     t_dur = 35  # Time-interval for each test in the decay-test.
 
 # Reads in the file as a db for further work
-file_path = os.path.join(os.path.split(os.getcwd())[0], os.path.split(os.getcwd())[1], 'demo\data', f[0])
-db.load(file_path, read=True)
+file_path = os.path.join(os.path.split(os.getcwd())[0], os.path.split(os.getcwd())[1], 'demo_performance\data', f[0])
+
+start1 = time.perf_counter()
+db.load( file_path )
+end1 = time.perf_counter()
+print("TsDB LOAD TIME: ", end1 - start1)
 
 # Reads in the relevant time-signal for further work and finds the maxima during the decay test.
 t,X = db.geta(name=n_name)
+y, K = db.geta(name="*M206_COF Y")
 
 maxima, indices = find_maxima(X, retind=True)
 
@@ -77,10 +82,11 @@ print("Periods between maximas are: ")
 print(t[indices2[0:-2]] - t[indices2[1:-1]])
 print("Number of oscillations observed is", len(t[indices2[0:-2]] - t[indices2[1:-1]]))
 
-print("Natural period for modeltest is", Tn, "seconds")
-print("Full scale natural period is", Tn * np.sqrt(sf), "seconds")
+print("Period for modeltest is", Tn, "seconds")
+print("Full scale period is", Tn * np.sqrt(sf), "seconds")
 end = time.perf_counter()
 print("TOTAL COMPUTING TIME: ", end-start)
 
 plt.show()
+
 
