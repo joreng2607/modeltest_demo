@@ -63,7 +63,7 @@ plt.title('Timeseries')
 plt.plot(t, X)
 plt.xlabel('Time [s]')
 plt.ylabel("Amplitude (mm)")
-plt.legend(['Free Decay Test sample'], loc='upper left')
+plt.legend(['Test sample'], loc='upper left')
 plt.grid()
 
 
