@@ -50,7 +50,6 @@ file_path = os.path.join(os.path.split(os.getcwd())[0], os.path.split(os.getcwd(
 start1 = time.perf_counter()
 db.load( file_path )
 end1 = time.perf_counter()
-print("TsDB LOAD TIME: ", end1 - start1)
 
 # Reads in the relevant time-signal for further work and finds the maxima during the decay test.
 t,X = db.geta(name=n_name)
